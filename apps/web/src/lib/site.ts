@@ -2,8 +2,21 @@ export const BRAND = "Creciendo Juntos";
 export const LOGO_ALT = "Creciendo Juntos A&N";
 export const SLOGAN = "Pequeños pasos hoy, grandes cambios mañana";
 
+const WHATSAPP_NUMBER =
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, "");
+
+if (!WHATSAPP_NUMBER) {
+  throw new Error(
+    "Falta configurar la variable NEXT_PUBLIC_WHATSAPP_NUMBER.",
+  );
+}
+
+const WHATSAPP_MESSAGE = encodeURIComponent(
+  "Hola, quisiera información sobre Creciendo Juntos",
+);
+
 export const PRIMARY_WHATSAPP = {
-  href: "https://wa.me/51931870496?text=Hola%2C%20quisiera%20informaci%C3%B3n%20sobre%20Creciendo%20Juntos",
+  href: `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`,
 };
 
 export const ADDRESS = {
