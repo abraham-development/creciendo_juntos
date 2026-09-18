@@ -1,6 +1,13 @@
 {
-  "extends": "@creciendo-juntos/typescript-config/base.json",
   "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

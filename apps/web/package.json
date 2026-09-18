@@ -2,7 +2,6 @@
   "name": "@creciendo-juntos/web",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@9.15.9",
   "scripts": {
     "dev": "next dev --port 3000",
     "build": "next build",
@@ -15,8 +14,6 @@
     "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "@creciendo-juntos/eslint-config": "workspace:*",
-    "@creciendo-juntos/typescript-config": "workspace:*",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

@@ -29,12 +29,6 @@ importers:
         specifier: 19.2.8
         version: 19.2.8(react@19.2.8)
     devDependencies:
-      '@creciendo-juntos/eslint-config':
-        specifier: workspace:*
-        version: link:../../packages/eslint-config
-      '@creciendo-juntos/typescript-config':
-        specifier: workspace:*
-        version: link:../../packages/typescript-config
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.3.3
