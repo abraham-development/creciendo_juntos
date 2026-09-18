@@ -1,0 +1,47 @@
+# Cursor: excluir del índice y del contexto automático del Agent.
+# Sintaxis tipo .gitignore. Cursor también respeta .gitignore del repo.
+# Si necesitas un archivo ignorado, menciónalo con @ en el chat.
+
+# --- Dependencias y builds (refuerzo; ya están en .gitignore) ---
+node_modules/
+.pnpm-store/
+.turbo/
+**/.next/
+**/out/
+**/dist/
+**/build/
+coverage/
+*.tsbuildinfo
+
+# --- Secretos y logs ---
+.env
+.env.*
+!.env.example
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# --- Lockfile (muy largo; rara vez hace falta al editar UI) ---
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# --- Duplicado de skills: la copia canónica está en .cursor/ ---
+.agents/
+
+# Impeccable: binarios y datos masivos (el skill sigue usable vía SKILL.md y reference/) ---
+.cursor/skills/impeccable/scripts/bin/
+.cursor/skills/impeccable/scripts/data/font-index.json
+.cursor/skills/impeccable/scripts/data/font-index-failures.json
+.cursor/skills/impeccable/scripts/modern-screenshot.umd.js
+
+# --- Assets: el código usa rutas en public/; no hace falta indexar bytes ---
+apps/web/public/**/*.jpeg
+apps/web/public/**/*.jpg
+apps/web/public/**/*.png
+apps/web/public/**/*.webp
+apps/web/public/**/*.gif
+apps/web/public/**/*.ico
+
+# --- Placeholder backend (sin código aún) ---
+apps/api/

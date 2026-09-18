@@ -1,0 +1,10 @@
+{
+  "name": "@creciendo-juntos/api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node -e \"console.log('[api] Aún no implementado. Auth admin y SUNAT viven aquí.')\"",
+    "build": "node -e \"console.log('[api] Sin build en esta entrega.')\"",
+    "lint": "node -e \"process.exit(0)\""
+  }
+}

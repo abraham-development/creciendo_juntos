@@ -1,0 +1,148 @@
+Prompt inicial — landing page Creciendo Juntos
+
+Construir un landing page en español llamado Creciendo Juntos.
+
+Objetivo del landing
+Convencer al visitante y llevarlo a contactar por WhatsApp. Esa es la llamada a la acción principal de la página.
+
+Qué es el negocio
+Los dueños son psicólogos. Creciendo Juntos se relaciona con estimulación temprana, con el desarrollo de los niños y con un crecimiento psicológico sano. El landing debe transmitir eso: cuidado, familia, infancia y rigor profesional de psicología. No es una tienda genérica ni un sitio clínico frío.
+
+Servicios
+Fuente: `recursos_internos/Servicios.jpeg`. Usar esta lista en la sección Servicios. No añadir, fusionar ni inventar otros servicios. No inventar descripciones largas si no están en el flyer.
+
+- Evaluación del desarrollo (0 a 5 años)
+- Estimulación e intervención temprana (6-36 meses)
+- Terapia de atención, concentración y conductual en niños
+- Manejo de ansiedad, estrés y depresión
+- Intervención en problemas conductuales y emocionales en adolescentes
+- Orientación y consejería familiar
+- Escuela para padres
+- Talleres de desarrollo personal y conductas saludables
+
+Dirección de diseño
+Estética moderna. Cálida y profesional a la vez.
+
+Debe sentirse:
+- Estimulación temprana y crecimiento: movimiento suave, espacio para respirar, sensación de acompañar a la familia.
+- Psicología: confianza, calma, seriedad; no infantilizar el oficio.
+- Moderno: layout limpio, tipografía contemporánea, jerarquía clara, buen ritmo, recortes actuales. No plantilla de 2010, no “web de niños” recargada.
+
+Evitar:
+- Clipart, emojis como identidad, arcoíris de juguete, globos, comic sans o equivalentes.
+- Estética de hospital, clínica genérica o corporativo frío.
+- Inventar una paleta o tipografía distinta a la del logo. Tomar cues de color del logotipo (violeta, naranja, verde del niño) sin convertirlos en un sistema inventado ni en un look infantil saturado.
+
+El visitante debe entender al primer vistazo que aquí hay psicólogos que acompañan el crecimiento de niños, no un entretenimiento suelto ni un consultorio anónimo.
+
+Home — Hero
+La sección Home es un Hero dinámico con carrusel (no una imagen fija). Autoplay, controles (flechas y/o puntos) y pausa al pasar el mouse o al enfocar. Accesible: `alt` en cada foto, no depender solo del movimiento.
+
+Fotos del carrusel (tres vistas, en este orden):
+1. `recursos_internos/Creciendo_foto.jpeg` — foto real de la sala de estimulación del local. `alt`: «Sala de estimulación de Creciendo Juntos».
+2. `recursos_internos/hero-carrusel-estimulacion.png` — imagen generada: niño en sesión de estimulación temprana en esa misma sala. `alt`: «Sesión de estimulación temprana en Creciendo Juntos».
+3. `recursos_internos/hero-carrusel-familia.png` — imagen generada: orientación familiar y crecimiento emocional. `alt`: «Acompañamiento a familias en Creciendo Juntos».
+
+No sustituir la foto real del local. Las otras dos son alusivas (generadas) para completar el carrusel; no usar stock de banco ni recortes del flyer.
+
+Toda foto generada para este proyecto se guarda en `recursos_internos/`. No dejarlas solo en una carpeta temporal del editor.
+
+Sobre el Hero puede ir copy corto y la CTA de WhatsApp, sin tapar de más la foto. No inventar titulares que no estén definidos.
+
+Arquitectura
+Stack: monorepo (pnpm workspaces + Turborepo) + TypeScript. El sitio público es Next.js (App Router) en `apps/web`. Hay backend previsto (login de administrador e integración SUNAT), por eso el repo nace como monorepo y no como app suelta que luego hay que partir.
+
+Por qué monorepo desde el inicio
+El landing es la primera entrega, pero «Iniciar sesión» y SUNAT van a necesitar API, secretos y lógica de servidor. Un solo Next.js con todo mezclado se vuelve frágil. Separar `apps/web` y `apps/api` desde la estructura (aunque el API aún no se implemente) deja el proyecto listo sin reescribir el landing.
+
+Estructura
+```text
+/
+  apps/
+    web/                 # Next.js App Router — landing y, más adelante, UI de admin
+    api/                 # futuro backend (auth admin, comprobantes, SUNAT). No implementar ahora
+  packages/
+    typescript-config/   # tsconfig compartido
+    eslint-config/       # lint compartido
+  recursos_internos/     # brief, logo y fotos fuente. No es código de producción
+  pnpm-workspace.yaml
+  turbo.json
+  .env.example
+```
+
+`apps/web` (App Router)
+```text
+apps/web/
+  src/app/
+    layout.tsx           # lang="es", metadata, header/footer
+    page.tsx             # landing de una sola página (secciones con anclas)
+    iniciar-sesion/
+      page.tsx           # placeholder; sin auth real en esta entrega
+    globals.css
+  src/components/        # Header, HeroCarousel, Servicios, Footer, etc.
+  public/                # logo y fotos del carrusel (copias de recursos_internos)
+```
+
+Reglas de la arquitectura
+- TypeScript estricto. Server Components por defecto; `"use client"` solo donde haga falta (carrusel, menú móvil).
+- Estilos: Tailwind CSS + tokens/cues de color del logotipo. No otro framework de UI ni plantilla marketplace.
+- Alias `@/` hacia `src/`.
+- `recursos_internos/` es fuente de diseño; los assets que sirve la web se copian a `apps/web/public/` (nombres estables).
+- El landing es estático en la práctica: sin CMS, sin base de datos y sin llamadas a SUNAT en esta entrega.
+- `Iniciar sesión` apunta a `/iniciar-sesion` en `apps/web`. Auth, sesión y SUNAT viven en `apps/api` cuando existan. Nunca credenciales ni API de SUNAT en el cliente.
+- Secretos solo en `.env.local` (no commitear). Documentar claves vacías en `.env.example`.
+- ESLint + Prettier. `pnpm dev` / `pnpm build` / `pnpm lint` desde la raíz via Turbo.
+- SEO básico: `metadata` en el layout (título Creciendo Juntos; no inventar descripción de marketing si no está definida).
+- Hosting: pendiente. Encaja Vercel para `apps/web`; el API se decide cuando se construya.
+- No implementar `apps/api` ni el flujo SUNAT en el primer corte del landing. Dejar la carpeta o el workspace listo, vacío o con un README de intención.
+
+Logotipo
+Usar el archivo real `recursos_internos/Logotipo.jpeg`. No inventar otro logo, no reemplazarlo por texto suelto, icono, emoji ni una versión redibujada.
+
+- Colocarlo a la izquierda del top bar.
+- Conservar la proporción del círculo; no recortar ni deformar.
+- Fondo del archivo es blanco: encaja sobre fondo claro; no forzar un recorte raro.
+- Texto visible en el lockup: CRECIENDO JUNTOS A&N.
+- `alt`: «Creciendo Juntos A&N».
+
+Header de dos niveles
+
+1. Top bar
+- Izquierda: el logotipo anterior (`recursos_internos/Logotipo.jpeg`).
+- Derecha, dos controles distintos, en este orden de izquierda a derecha:
+  1. Botón secundario: Iniciar sesión.
+  2. Llamada a la acción principal: contacto por WhatsApp.
+
+El botón Iniciar sesión no es para clientes ni visitantes. Es solo para un administrador (la dueña del negocio o quien ella designe). Debe verse claramente menos importante que el WhatsApp: enlace o botón secundario, no competir con la CTA.
+
+Para qué existe Iniciar sesión
+Da entrada a un área privada donde el administrador se conecta a la API de la SUNAT (Superintendencia Nacional de Aduanas y de Administración Tributaria, Perú). Desde ahí se envían los comprobantes/recibos de los servicios que brinda el negocio y se cubre lo necesario ante SUNAT.
+
+En este landing:
+- Mostrar el botón Iniciar sesión en el top bar.
+- No implementar todavía el login, el área privada ni la integración con SUNAT.
+- El botón puede apuntar a una ruta futura (por ejemplo /admin o /iniciar-sesion) o quedar como control visible sin flujo completo.
+- No pedir registro al público. No sugerir que los clientes tengan cuenta.
+
+2. Navbar
+Enlaces de ancla a secciones del mismo landing:
+- Home (Hero dinámico con carrusel de tres vistas en `recursos_internos/`)
+- Servicios (usar la lista de este archivo; fuente `recursos_internos/Servicios.jpeg`)
+- Nosotros
+- Ubicación y Contacto
+
+Pie de página
+Tres redes sociales:
+- WhatsApp
+- Facebook
+- Instagram
+
+Restricciones
+- No inventar precios, testimonios, métricas, datos de contacto, URLs reales ni copy de producto si no está definido.
+- Si falta un dato (número de WhatsApp, enlaces de redes, copy de Nosotros), marcarlo como pendiente. Los servicios ya están definidos; no completarlos con copy inventado.
+- El logotipo ya existe: usar `recursos_internos/Logotipo.jpeg`. No marcarlo como pendiente.
+- Carrusel del Hero: usar las tres fotos listadas en este archivo. La del local es real; las otras dos son generadas y viven en `recursos_internos/`.
+- Toda imagen generada debe copiarse a `recursos_internos/` (no dejarla fuera del proyecto).
+- Hay brief de diseño en este archivo: moderno, estimulación temprana, infancia y psicología. Respetarlo. El logo es el activo de marca; no inventar otra paleta ni otra tipografía “de niños”.
+- El nombre de marca es Creciendo Juntos. En el logo aparece Creciendo Juntos A&N: respetar ese lockup en la imagen; no reescribir el wordmark a mano.
+- Stack fijado: Next.js App Router, TypeScript, monorepo pnpm + Turborepo (`apps/web` ahora; `apps/api` después). No cambiar de framework.

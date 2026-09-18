@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+:root {
+  --violet: #53306d;
+  --violet-deep: #24142f;
+  --orange: #c24e1e;
+  --teal: #2f6b61;
+  --ink: #1c1424;
+  --paper: #f7f5f2;
+  --paper-2: #efeae6;
+  --line: color-mix(in oklab, var(--ink) 14%, transparent);
+}
+
+@theme inline {
+  --color-violet: var(--violet);
+  --color-violet-deep: var(--violet-deep);
+  --color-orange: var(--orange);
+  --color-teal: var(--teal);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-line: var(--line);
+  --font-sans: var(--font-karla);
+  --font-display: var(--font-literata);
+}
+
+html {
+  scroll-padding-top: 7.5rem;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+::selection {
+  background: var(--violet-deep);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+}
+
+a {
+  text-underline-offset: 0.22em;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper-2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--violet) 55%, var(--ink));
+}
+
+@keyframes hero-pan {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes hero-copy-enter {
+  from {
+    opacity: 0.35;
+    transform: translateY(0.75rem);
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes hero-progress {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.hero-slide-image {
+  animation: hero-pan 3s ease-out forwards;
+}
+
+.hero-copy-enter {
+  animation: hero-copy-enter 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-progress {
+  animation-name: hero-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes nosotros-curtain-reveal {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes nosotros-photo-develop {
+  from {
+    filter: saturate(0.72) contrast(0.92);
+    transform: scale(1.045);
+  }
+
+  to {
+    filter: saturate(1) contrast(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes nosotros-caption-enter {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nosotros-stage {
+  --nosotros-shift: 0%;
+  --nosotros-scale: 1.035;
+}
+
+.nosotros-photo-motion {
+  transform: translate3d(0, var(--nosotros-shift), 0)
+    scale(var(--nosotros-scale));
+  transform-origin: center 35%;
+}
+
+.nosotros-photo-enter {
+  animation: nosotros-photo-develop 1800ms cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+.nosotros-caption {
+  animation: nosotros-caption-enter 900ms 1150ms
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.nosotros-curtain {
+  background: var(--violet-deep);
+  transform: scaleX(0);
+  transform-origin: right center;
+  animation: nosotros-curtain-reveal 1600ms 100ms
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .nosotros-photo-motion {
+    transform: none;
+  }
+
+  .nosotros-photo-enter,
+  .nosotros-caption {
+    animation: none;
+  }
+
+  .nosotros-curtain {
+    display: none;
+  }
+}
