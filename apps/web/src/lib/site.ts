@@ -22,7 +22,8 @@ export const PRIMARY_WHATSAPP = {
 export const ADDRESS = {
   line: "Av. Circunvalación 595 — 2do piso",
   note: "A una cuadra de la UTP",
-  maps: "https://www.google.com/maps/search/?api=1&query=Av.+Circunvalaci%C3%B3n+595",
+  maps:
+    "https://www.google.com/maps/search/?api=1&query=Av.%20Circunvalaci%C3%B3n%20595%2C%20Huancayo%2C%20Jun%C3%ADn%2C%20Per%C3%BA",
 };
 
 export const NAV = [
