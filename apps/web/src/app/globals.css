@@ -1,14 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --violet: #53306d;
-  --violet-deep: #24142f;
-  --orange: #c24e1e;
-  --teal: #2f6b61;
-  --ink: #1c1424;
-  --paper: #f7f5f2;
-  --paper-2: #efeae6;
-  --line: color-mix(in oklab, var(--ink) 14%, transparent);
+  --violet: #4f2f68;
+  --violet-deep: #231432;
+  --orange: #d95528;
+  --teal: #2a6f66;
+  --ink: #1a1523;
+  --paper: #f2f1f4;
+  --paper-2: #e8e6ec;
+  --surface: #ffffff;
+  --line: color-mix(in oklab, var(--ink) 10%, transparent);
+  --shadow-soft: 0 1px 2px color-mix(in oklab, var(--ink) 6%, transparent),
+    0 12px 32px color-mix(in oklab, var(--violet-deep) 8%, transparent);
+  --radius-control: 0.75rem;
+  --radius-media: 1.25rem;
 }
 
 @theme inline {
@@ -19,9 +24,13 @@
   --color-ink: var(--ink);
   --color-paper: var(--paper);
   --color-paper-2: var(--paper-2);
+  --color-surface: var(--surface);
   --color-line: var(--line);
   --font-sans: var(--font-karla);
   --font-display: var(--font-literata);
+  --shadow-soft: var(--shadow-soft);
+  --radius-control: var(--radius-control);
+  --radius-media: var(--radius-media);
 }
 
 html {
@@ -29,13 +38,24 @@ html {
 }
 
 body {
-  background: var(--paper);
+  background:
+    radial-gradient(
+      120% 80% at 100% -10%,
+      color-mix(in oklab, var(--violet) 8%, transparent),
+      transparent 55%
+    ),
+    radial-gradient(
+      90% 60% at -5% 30%,
+      color-mix(in oklab, var(--teal) 7%, transparent),
+      transparent 50%
+    ),
+    var(--paper);
   color: var(--ink);
 }
 
 ::selection {
-  background: var(--violet-deep);
-  color: var(--paper);
+  background: var(--violet);
+  color: var(--surface);
 }
 
 :focus-visible {
@@ -57,7 +77,8 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: color-mix(in oklab, var(--violet) 55%, var(--ink));
+  background: color-mix(in oklab, var(--violet) 45%, var(--ink));
+  border-radius: 999px;
 }
 
 @keyframes hero-pan {
@@ -66,21 +87,19 @@ a {
   }
 
   to {
-    transform: scale(1.06);
+    transform: scale(1.05);
   }
 }
 
 @keyframes hero-copy-enter {
   from {
-    opacity: 0.35;
-    transform: translateY(0.75rem);
-    filter: blur(3px);
+    opacity: 0.4;
+    transform: translateY(0.5rem);
   }
 
   to {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
   }
 }
 
@@ -99,7 +118,7 @@ a {
 }
 
 .hero-copy-enter {
-  animation: hero-copy-enter 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: hero-copy-enter 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .hero-progress {
@@ -120,8 +139,8 @@ a {
 
 @keyframes nosotros-photo-develop {
   from {
-    filter: saturate(0.72) contrast(0.92);
-    transform: scale(1.045);
+    filter: saturate(0.78) contrast(0.94);
+    transform: scale(1.035);
   }
 
   to {
@@ -133,7 +152,7 @@ a {
 @keyframes nosotros-caption-enter {
   from {
     opacity: 0;
-    transform: translateY(1rem);
+    transform: translateY(0.75rem);
   }
 
   to {
@@ -144,7 +163,7 @@ a {
 
 .nosotros-stage {
   --nosotros-shift: 0%;
-  --nosotros-scale: 1.035;
+  --nosotros-scale: 1.03;
 }
 
 .nosotros-photo-motion {
@@ -154,21 +173,20 @@ a {
 }
 
 .nosotros-photo-enter {
-  animation: nosotros-photo-develop 1800ms cubic-bezier(0.16, 1, 0.3, 1)
-    both;
+  animation: nosotros-photo-develop 1600ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .nosotros-caption {
-  animation: nosotros-caption-enter 900ms 1150ms
-    cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: nosotros-caption-enter 800ms 1000ms cubic-bezier(0.16, 1, 0.3, 1)
+    both;
 }
 
 .nosotros-curtain {
   background: var(--violet-deep);
   transform: scaleX(0);
   transform-origin: right center;
-  animation: nosotros-curtain-reveal 1600ms 100ms
-    cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: nosotros-curtain-reveal 1400ms 80ms cubic-bezier(0.16, 1, 0.3, 1)
+    both;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -42,15 +42,12 @@ export function HeroCarousel() {
     setIndex(((next % total) + total) % total);
   }, []);
 
-  const go = useCallback(
-    (delta: number) => {
-      setIndex((current) => {
-        const total = HERO_SLIDES.length;
-        return (current + delta + total) % total;
-      });
-    },
-    [],
-  );
+  const go = useCallback((delta: number) => {
+    setIndex((current) => {
+      const total = HERO_SLIDES.length;
+      return (current + delta + total) % total;
+    });
+  }, []);
 
   const autoplay = !userPaused && !reduceMotion && !tabHidden;
 
@@ -66,7 +63,7 @@ export function HeroCarousel() {
     <section
       aria-roledescription="carrusel"
       aria-labelledby={labelId}
-      className="border-b border-line"
+      className="border-b border-line/70"
     >
       <div className="grid min-h-[calc(100svh-7.5rem)] w-full lg:grid-cols-[minmax(21rem,0.43fr)_1fr]">
         <div className="relative order-1 h-[50vh] w-full min-w-0 overflow-hidden bg-violet-deep lg:order-2 lg:h-auto lg:min-h-full">
@@ -93,12 +90,12 @@ export function HeroCarousel() {
               />
             </div>
           ))}
-          <p className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-violet-deep/80 to-transparent px-4 pb-4 pt-10 text-xs tracking-wide text-white lg:px-6 lg:pb-6">
+          <p className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-violet-deep/85 to-transparent px-4 pb-4 pt-12 text-xs tracking-wide text-white/90 lg:px-6 lg:pb-6">
             {current.alt}
           </p>
         </div>
 
-        <div className="order-2 flex w-full min-w-0 flex-col justify-end bg-paper px-4 py-12 sm:px-6 sm:py-16 lg:order-1 lg:px-10 lg:py-16 xl:px-14 xl:py-20">
+        <div className="order-2 flex w-full min-w-0 flex-col justify-end bg-surface/70 px-4 py-12 sm:px-6 sm:py-16 lg:order-1 lg:bg-transparent lg:px-10 lg:py-16 xl:px-14 xl:py-20">
           <div className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
             <div
               key={current.src}
@@ -112,7 +109,7 @@ export function HeroCarousel() {
               >
                 {current.title}
               </h1>
-              <p className="mt-6 max-w-[38ch] text-[1.0625rem] leading-relaxed text-ink/75">
+              <p className="mt-6 max-w-[38ch] text-[1.0625rem] leading-relaxed text-ink/70">
                 {current.description}
               </p>
             </div>
@@ -121,7 +118,7 @@ export function HeroCarousel() {
               <WhatsAppCta />
               <Link
                 href="/servicios"
-                className="text-sm font-medium text-violet underline decoration-violet/30 underline-offset-4 transition-colors hover:text-violet-deep hover:decoration-violet-deep"
+                className="text-sm font-medium text-violet underline decoration-violet/25 underline-offset-4 transition-colors hover:text-violet-deep hover:decoration-violet-deep"
               >
                 Conocer los servicios
               </Link>
@@ -131,7 +128,7 @@ export function HeroCarousel() {
               <button
                 type="button"
                 onClick={() => go(-1)}
-                className="flex h-11 w-11 items-center justify-center border border-line text-ink transition-colors hover:border-ink hover:bg-paper-2"
+                className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-control)] border border-line bg-surface text-ink transition-colors hover:border-ink/30 hover:bg-paper-2"
                 aria-label="Diapositiva anterior"
               >
                 <ChevronLeftIcon className="h-4 w-4" />
@@ -140,7 +137,7 @@ export function HeroCarousel() {
                 type="button"
                 onClick={() => setUserPaused((value) => !value)}
                 disabled={reduceMotion}
-                className="flex h-11 w-11 items-center justify-center border border-line text-ink transition-colors hover:border-ink hover:bg-paper-2 disabled:cursor-not-allowed disabled:opacity-40"
+                className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-control)] border border-line bg-surface text-ink transition-colors hover:border-ink/30 hover:bg-paper-2 disabled:cursor-not-allowed disabled:opacity-40"
                 aria-label={
                   reduceMotion
                     ? "Reproducción automática desactivada por preferencia de movimiento reducido"
@@ -158,13 +155,13 @@ export function HeroCarousel() {
               <button
                 type="button"
                 onClick={() => go(1)}
-                className="flex h-11 w-11 items-center justify-center border border-line text-ink transition-colors hover:border-ink hover:bg-paper-2"
+                className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-control)] border border-line bg-surface text-ink transition-colors hover:border-ink/30 hover:bg-paper-2"
                 aria-label="Diapositiva siguiente"
               >
                 <ChevronRightIcon className="h-4 w-4" />
               </button>
               <p
-                className="ml-2 text-sm tabular-nums tracking-wide text-ink/60"
+                className="ml-2 text-sm tabular-nums tracking-wide text-ink/55"
                 aria-live="polite"
               >
                 {String(index + 1).padStart(2, "0")} /{" "}
@@ -191,17 +188,21 @@ export function HeroCarousel() {
                   >
                     <span
                       aria-hidden
-                      className="absolute inset-x-0 top-1/2 h-1.5 -translate-y-1/2 overflow-hidden bg-ink/15"
+                      className="absolute inset-x-0 top-1/2 h-1.5 -translate-y-1/2 overflow-hidden rounded-full bg-ink/12"
                     >
                       {active ? (
                         <span
                           key={`${index}-${autoplay}`}
-                          className={`absolute inset-y-0 left-0 bg-violet ${
-                            reduceMotion || !autoplay ? "w-full" : "hero-progress"
+                          className={`absolute inset-y-0 left-0 rounded-full bg-violet ${
+                            reduceMotion || !autoplay
+                              ? "w-full"
+                              : "hero-progress"
                           }`}
                           style={{
                             animationDuration: `${INTERVAL_MS}ms`,
-                            animationPlayState: autoplay ? "running" : "paused",
+                            animationPlayState: autoplay
+                              ? "running"
+                              : "paused",
                           }}
                         />
                       ) : null}

@@ -14,17 +14,17 @@ export default function IniciarSesionPage() {
       <h1 className="font-display text-3xl font-medium tracking-[-0.03em] text-ink sm:text-4xl">
         Iniciar sesión
       </h1>
-      <p className="mt-5 max-w-[55ch] text-[1.0625rem] leading-relaxed text-ink/75">
+      <p className="mt-5 max-w-[55ch] text-[1.0625rem] leading-relaxed text-ink/70">
         Este acceso es solo para el administrador de Creciendo Juntos. No es
         una cuenta para familias ni visitantes.
       </p>
-      <p className="mt-4 max-w-[55ch] leading-relaxed text-ink/70">
+      <p className="mt-4 max-w-[55ch] leading-relaxed text-ink/65">
         El ingreso al área privada (comprobantes y SUNAT) se habilitará más
         adelante. Todavía no hay autenticación.
       </p>
       <Link
         href="/"
-        className="mt-10 inline-flex w-fit border border-ink px-5 py-2.5 text-sm text-ink transition-colors hover:bg-ink hover:text-paper"
+        className="mt-10 inline-flex w-fit rounded-[var(--radius-control)] border border-ink/80 px-5 py-2.5 text-sm text-ink transition-colors hover:bg-ink hover:text-paper"
       >
         Volver al inicio
       </Link>

@@ -5,13 +5,13 @@ import { SERVICE_GROUPS } from "@/lib/site";
 export function Servicios() {
   return (
     <>
-      <section className="border-b border-line bg-paper">
+      <section className="border-b border-line/70 bg-surface/60">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-12 lg:items-end lg:gap-16 lg:py-28">
           <h1 className="max-w-[13ch] font-display text-[2.75rem] font-medium leading-[1.06] tracking-[-0.04em] text-ink sm:text-6xl lg:col-span-7">
             Servicios para acompañar su desarrollo y bienestar
           </h1>
           <div className="max-w-[52ch] lg:col-span-5 lg:pb-1">
-            <p className="text-[1.0625rem] leading-[1.7] text-ink/75 sm:text-lg">
+            <p className="text-[1.0625rem] leading-[1.7] text-ink/70 sm:text-lg">
               Trabajamos con niños, adolescentes y familias desde la psicología
               y la estimulación temprana, con atención cercana a las
               necesidades de cada etapa.
@@ -35,8 +35,8 @@ export function Servicios() {
                 dark
                   ? "bg-violet-deep text-paper"
                   : index === 0
-                    ? "bg-paper-2 text-ink"
-                    : "bg-paper text-ink"
+                    ? "bg-paper-2/80 text-ink"
+                    : "bg-surface/50 text-ink"
               }
             >
               <div className="mx-auto grid max-w-6xl lg:min-h-[36rem] lg:grid-cols-2">
@@ -64,7 +64,7 @@ export function Servicios() {
                   </h2>
                   <p
                     className={`mt-5 max-w-[48ch] text-[1.0625rem] leading-relaxed ${
-                      dark ? "text-paper/75" : "text-ink/68"
+                      dark ? "text-paper/75" : "text-ink/65"
                     }`}
                   >
                     {group.description}
@@ -72,7 +72,7 @@ export function Servicios() {
 
                   <ul
                     className={`mt-9 border-t ${
-                      dark ? "border-paper/20" : "border-ink/15"
+                      dark ? "border-paper/20" : "border-ink/10"
                     }`}
                   >
                     {group.services.map((service) => (
@@ -81,14 +81,14 @@ export function Servicios() {
                         className={`py-4 text-[1.0625rem] leading-snug ${
                           dark
                             ? "border-b border-paper/20 text-paper"
-                            : "border-b border-ink/15 text-ink"
+                            : "border-b border-ink/10 text-ink"
                         }`}
                       >
                         {service.title}
                         {"note" in service ? (
                           <span
                             className={`mt-1 block text-sm ${
-                              dark ? "text-paper/60" : "text-ink/55"
+                              dark ? "text-paper/60" : "text-ink/50"
                             }`}
                           >
                             {service.note}
@@ -104,7 +104,7 @@ export function Servicios() {
         })}
       </div>
 
-      <section className="border-t border-paper/15 bg-violet-deep text-paper">
+      <section className="bg-violet-deep text-paper">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-12 lg:items-center lg:gap-16">
           <h2 className="max-w-[16ch] font-display text-3xl font-medium leading-tight tracking-[-0.03em] sm:text-4xl lg:col-span-7">
             ¿No sabes qué servicio necesitas?

@@ -45,7 +45,7 @@ export function Nosotros() {
       );
       page.style.setProperty(
         "--nosotros-scale",
-        (1.035 + progress * 0.045).toFixed(4),
+        (1.03 + progress * 0.04).toFixed(4),
       );
     };
 
@@ -91,29 +91,32 @@ export function Nosotros() {
         <figcaption className="nosotros-caption absolute bottom-7 left-5 z-20 max-w-[15rem] text-paper sm:bottom-10 sm:left-8">
           <span
             aria-hidden="true"
-            className="mb-4 block h-px w-10 bg-orange"
+            className="mb-4 block h-0.5 w-10 rounded-full bg-orange"
           />
           <span className="font-display text-xl leading-snug tracking-[-0.02em] sm:text-2xl">
             Cuidado, familia e infancia.
           </span>
         </figcaption>
 
-        <div aria-hidden="true" className="nosotros-curtain absolute inset-0 z-30" />
+        <div
+          aria-hidden="true"
+          className="nosotros-curtain absolute inset-0 z-30"
+        />
       </figure>
 
-      <article className="bg-paper px-5 py-14 sm:px-10 sm:py-20 lg:px-16 lg:py-24 xl:px-24">
+      <article className="bg-surface/70 px-5 py-14 sm:px-10 sm:py-20 lg:bg-transparent lg:px-16 lg:py-24 xl:px-24">
         <div className="mx-auto max-w-[36rem]">
           <h1 className="font-display text-[2.5rem] font-medium leading-[1.08] tracking-[-0.035em] text-ink sm:text-[3.25rem]">
             Nosotros
           </h1>
-          <p className="mt-8 text-[1.125rem] leading-[1.75] text-ink/78">
+          <p className="mt-8 text-[1.125rem] leading-[1.75] text-ink/72">
             Somos profesionales de la psicología comprometidos con el
             desarrollo y el bienestar de niños, adolescentes y sus familias.
             Brindamos el apoyo psicológico y la estimulación que cada etapa
             necesita, con una atención cercana, responsable y respetuosa.
           </p>
 
-          <div className="mt-12 space-y-5 text-[1.0625rem] leading-[1.8] text-ink/78">
+          <div className="mt-12 space-y-5 text-[1.0625rem] leading-[1.8] text-ink/72">
             <p>
               En Creciendo Juntos sabemos que pedir orientación es un paso
               importante. Por eso escuchamos cada situación con cuidado y
@@ -130,7 +133,7 @@ export function Nosotros() {
           <h2 className="mt-16 font-display text-[1.65rem] font-medium tracking-[-0.03em] text-ink sm:text-[1.85rem]">
             Servicios para acompañarlos
           </h2>
-          <div className="mt-6 space-y-5 text-[1.0625rem] leading-[1.8] text-ink/78">
+          <div className="mt-6 space-y-5 text-[1.0625rem] leading-[1.8] text-ink/72">
             <p>
               Ofrecemos evaluación del desarrollo, estimulación e intervención
               temprana, atención psicológica para niños y adolescentes, además
@@ -139,14 +142,14 @@ export function Nosotros() {
           </div>
 
           <div className="mt-16 border-t border-line pt-10">
-            <p className="max-w-[36ch] text-[1.0625rem] leading-relaxed text-ink/70">
+            <p className="max-w-[36ch] text-[1.0625rem] leading-relaxed text-ink/65">
               Conoce todas las opciones de atención o escríbenos si necesitas
               orientación para elegir un servicio.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-4">
               <Link
                 href="/servicios"
-                className="text-sm font-medium text-violet underline decoration-violet/30 underline-offset-4 transition-colors hover:text-violet-deep hover:decoration-violet-deep"
+                className="text-sm font-medium text-violet underline decoration-violet/25 underline-offset-4 transition-colors hover:text-violet-deep hover:decoration-violet-deep"
               >
                 Ver todos los servicios
               </Link>

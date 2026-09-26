@@ -14,7 +14,7 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-paper/10 bg-violet-deep text-paper">
+    <footer className="bg-violet-deep text-paper">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <div className="grid gap-x-10 gap-y-12 py-14 sm:grid-cols-2 sm:py-16 lg:grid-cols-[1.35fr_0.65fr_0.9fr_0.8fr] lg:py-20">
           <div className="max-w-sm sm:col-span-2 lg:col-span-1">
@@ -24,7 +24,7 @@ export function SiteFooter() {
                 alt={LOGO_ALT}
                 width={56}
                 height={56}
-                className="h-12 w-12 object-contain"
+                className="h-12 w-12 rounded-xl object-contain"
               />
               <span className="font-display text-xl font-medium tracking-[-0.025em]">
                 {BRAND}
@@ -40,9 +40,7 @@ export function SiteFooter() {
           </div>
 
           <nav aria-label="Navegación del pie de página">
-            <h2 className="text-sm font-medium tracking-[0.06em] text-paper">
-              Explorar
-            </h2>
+            <h2 className="text-sm font-medium text-paper">Explorar</h2>
             <ul className="mt-5 space-y-3 text-sm text-paper/70">
               {NAV.map((item) => (
                 <li key={item.href}>
@@ -58,9 +56,7 @@ export function SiteFooter() {
           </nav>
 
           <div>
-            <h2 className="text-sm font-medium tracking-[0.06em] text-paper">
-              Ubicación
-            </h2>
+            <h2 className="text-sm font-medium text-paper">Ubicación</h2>
             <address className="mt-5 not-italic">
               <p className="max-w-[23ch] text-sm leading-relaxed text-paper/75">
                 {ADDRESS.line}
@@ -78,14 +74,12 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h2 className="text-sm font-medium tracking-[0.06em] text-paper">
-              Contacto
-            </h2>
+            <h2 className="text-sm font-medium text-paper">Contacto</h2>
             <a
               href={PRIMARY_WHATSAPP.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-5 inline-flex items-center gap-2 border border-paper/25 px-4 py-2.5 text-sm text-paper transition-colors hover:border-paper hover:bg-paper hover:text-violet-deep"
+              className="mt-5 inline-flex items-center gap-2 rounded-[var(--radius-control)] border border-paper/25 px-4 py-2.5 text-sm text-paper transition-colors hover:border-paper hover:bg-paper hover:text-violet-deep"
             >
               <WhatsAppIcon className="h-4 w-4" />
               Escribir por WhatsApp
@@ -116,7 +110,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 border-t border-paper/15 py-6 text-xs leading-relaxed text-paper/55 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-2 border-t border-paper/12 py-6 text-xs leading-relaxed text-paper/55 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {BRAND}. Todos los derechos reservados.
           </p>

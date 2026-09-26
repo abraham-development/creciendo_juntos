@@ -4,7 +4,7 @@ import { ADDRESS } from "@/lib/site";
 
 export function Contacto() {
   return (
-    <section className="bg-paper">
+    <section className="bg-surface/50">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
         <h1 className="font-display text-3xl font-medium tracking-[-0.03em] text-ink sm:text-4xl">
           Ubicación y Contacto
@@ -17,12 +17,12 @@ export function Contacto() {
             <p className="mt-4 max-w-[22ch] font-display text-2xl font-medium leading-snug tracking-[-0.02em] text-ink sm:text-[1.75rem]">
               {ADDRESS.line}
             </p>
-            <p className="mt-3 text-ink/70">{ADDRESS.note}</p>
+            <p className="mt-3 text-ink/65">{ADDRESS.note}</p>
             <a
               href={ADDRESS.maps}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-block text-sm text-violet underline decoration-violet/30 underline-offset-4 hover:decoration-violet"
+              className="mt-6 inline-block text-sm text-violet underline decoration-violet/25 underline-offset-4 hover:decoration-violet"
             >
               Ver en el mapa
             </a>
@@ -31,7 +31,7 @@ export function Contacto() {
             <h2 className="font-display text-xl font-medium text-ink">
               WhatsApp
             </h2>
-            <p className="mt-4 max-w-[40ch] text-[1.0625rem] leading-relaxed text-ink/70">
+            <p className="mt-4 max-w-[40ch] text-[1.0625rem] leading-relaxed text-ink/65">
               Escríbenos. Conversamos por WhatsApp sobre el servicio que
               necesitas.
             </p>
@@ -44,7 +44,7 @@ export function Contacto() {
             <h2 className="font-display text-2xl font-medium tracking-[-0.025em] text-ink sm:text-3xl">
               Cómo llegar
             </h2>
-            <p className="max-w-[48ch] text-[1.0625rem] leading-relaxed text-ink/70">
+            <p className="max-w-[48ch] text-[1.0625rem] leading-relaxed text-ink/65">
               Toma la Universidad Tecnológica del Perú como referencia.
               Creciendo Juntos se encuentra en la Av. Circunvalación 595, 2.º
               piso.
@@ -56,7 +56,7 @@ export function Contacto() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Abrir la ubicación de Creciendo Juntos en Google Maps"
-            className="group mt-8 block overflow-hidden bg-paper-2 focus-visible:outline-offset-4"
+            className="group mt-8 block overflow-hidden rounded-[var(--radius-media)] bg-paper-2 shadow-soft focus-visible:outline-offset-4"
           >
             <div className="relative aspect-[4/3] overflow-hidden sm:aspect-auto">
               <Image
@@ -69,7 +69,7 @@ export function Contacto() {
               />
             </div>
           </a>
-          <p className="mt-3 text-sm text-ink/60">
+          <p className="mt-3 text-sm text-ink/55">
             Selecciona el mapa para abrir la ubicación en Google Maps.
           </p>
         </div>
