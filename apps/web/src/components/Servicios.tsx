@@ -104,13 +104,13 @@ export function Servicios() {
         })}
       </div>
 
-      <section className="bg-violet-deep text-paper">
+      <section className="border-t border-line/70 bg-surface text-ink">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-12 lg:items-center lg:gap-16">
           <h2 className="max-w-[16ch] font-display text-3xl font-medium leading-tight tracking-[-0.03em] sm:text-4xl lg:col-span-7">
             ¿No sabes qué servicio necesitas?
           </h2>
           <div className="lg:col-span-5">
-            <p className="max-w-[47ch] text-[1.0625rem] leading-relaxed text-paper/75">
+            <p className="max-w-[47ch] text-[1.0625rem] leading-relaxed text-ink/70">
               Cuéntanos brevemente qué estás buscando y conversemos por
               WhatsApp.
             </p>
