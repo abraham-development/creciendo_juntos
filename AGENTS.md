@@ -181,7 +181,7 @@ Actualizar esta lista al resolver cada punto:
 - [x] Logo, servicios y fotos del carrusel: fuente en `recursos_internos/`, copias servidas desde `public/`.
 - [x] WhatsApp y dirección centralizados en `site.ts`; el número no se muestra como texto en la UI.
 - [x] Dominio: `creciendojuntos.site`.
-- [ ] Hosting definitivo y procedimiento de despliegue verificado en producción (DNS de `creciendojuntos.site` y `www` apuntando al hosting, SSL activo).
+- [x] Hosting y despliegue: Hostinger, app Node.js del sitio `creciendojuntos.site`. Auto-deploy activo: cada push a `main` del repo `abraham-development/creciendo_juntos` lanza un build (`apps/web`, npm, Node 24, `npm run build`). `NEXT_PUBLIC_WHATSAPP_NUMBER` está configurada en las variables de entorno del sitio en Hostinger; al cambiarla hay que reconstruir.
 - [ ] Copy definitivo de Nosotros y del hero; el actual es provisional.
 - [ ] URLs reales de Facebook e Instagram; el footer todavía usa placeholders.
 - [ ] Requisitos adicionales de accesibilidad o marca que deban respetarse.
@@ -192,6 +192,8 @@ Actualizar esta lista al resolver cada punto:
 
 - Integración del dominio `https://creciendojuntos.site`: `SITE_URL` y `SITE_DESCRIPTION` en `src/lib/site.ts`; `metadataBase`, descripción y Open Graph (`es_PE`, logo como imagen) en `src/app/layout.tsx`; `alternates.canonical` en cada `page.tsx`; nuevos `src/app/robots.ts` y `src/app/sitemap.ts`; `noindex` en `/iniciar-sesion`; redirección 308 `www` → raíz en `next.config.mjs`.
 - Validación: `pnpm --filter @creciendo-juntos/web lint` (ok); `pnpm build` en `apps/web` con `NEXT_PUBLIC_WHATSAPP_NUMBER` ficticio exportado solo en la shell (no había `.env.local` en esta máquina) (ok); con `pnpm start` se comprobó `/robots.txt`, `/sitemap.xml`, canónicas y `og:*` absolutas, `noindex` en `/iniciar-sesion` y `curl -H "Host: www.creciendojuntos.site"` → 308.
-- Pendiente: el 2026-10-16 el dominio aún no resolvía en DNS. Al desplegar, apuntar raíz y `www` al hosting, activar SSL, configurar `NEXT_PUBLIC_WHATSAPP_NUMBER` en el hosting y reconstruir; luego verificar `https://creciendojuntos.site/robots.txt` y registrar el sitemap en Google Search Console.
+- Despliegue: commit `eeda127` en `main`; el auto-deploy de Hostinger lo construyó sin errores. DNS en los nameservers de Hostinger (`artemis`/`hermes.dns-parking.com`): ALIAS en `@` y CNAME en `www` hacia el CDN de Hostinger. SSL activo para la raíz y `www` (vence 2027-01-14; Hostinger lo renueva).
+- Verificado en producción con `curl`: `/`, `/servicios`, `/robots.txt` y `/sitemap.xml` → 200; `www` → 308 a la raíz; HTTP → 301 a HTTPS; canónicas y `og:image` absolutas; `noindex` en `/iniciar-sesion`; enlace de WhatsApp presente.
+- Pendiente para el usuario: registrar `https://creciendojuntos.site/sitemap.xml` en Google Search Console (requiere su cuenta de Google).
 - Sin cambios visuales en esta sesión; sigue pendiente la revisión en navegador del rediseño del 2026-09-26 (menú móvil, carrusel, CTA WhatsApp).
 
