@@ -2,6 +2,10 @@ export const BRAND = "Creciendo Juntos";
 export const LOGO_ALT = "Creciendo Juntos A&N";
 export const SLOGAN = "Pequeños pasos hoy, grandes cambios mañana";
 
+export const SITE_URL = "https://creciendojuntos.site";
+export const SITE_DESCRIPTION =
+  "Centro de psicología y estimulación temprana. Acompañamos a niños, adolescentes y familias.";
+
 const WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, "");
 

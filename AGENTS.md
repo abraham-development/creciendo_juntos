@@ -50,6 +50,7 @@ La verdad de producto está en `PRODUCT.md`. No duplicar allí detalles técnico
 ## Estado actual confirmado
 
 - Sitio público implementado en `apps/web` con Next.js App Router, TypeScript y Tailwind CSS.
+- Dominio de producción: **https://creciendojuntos.site** (sin `www`). Vive en `SITE_URL` (`apps/web/src/lib/site.ts`) y alimenta `metadataBase`, las URLs canónicas, Open Graph, `robots.txt` y `sitemap.xml`. `www.creciendojuntos.site` redirige con 308 al dominio raíz desde `apps/web/next.config.mjs`. Si cambia el dominio, actualizar ambos lugares.
 - Arquitectura multipágina: cada ítem del menú principal es una ruta de nivel superior, no un ancla de una sola landing.
 - Header y footer globales, navegación con estado activo, menú móvil, enlace para saltar al contenido y metadata por página.
 - Home con carrusel dinámico; páginas de servicios, nosotros y ubicación; entrada de administración todavía como placeholder.
@@ -70,7 +71,9 @@ La verdad de producto está en `PRODUCT.md`. No duplicar allí detalles técnico
 | `/ubicacion` | Dirección, mapa y CTA de WhatsApp | Implementada |
 | `/iniciar-sesion` | Entrada futura al área administrativa | Placeholder, sin auth |
 
-La navegación vive en `NAV`, dentro de `apps/web/src/lib/site.ts`. El header usa `Link` de Next, `usePathname()` y `aria-current="page"`. Cada página debe conservar un único `<h1>`, un `<main id="contenido">` y metadata propia (`title` y `description`).
+La navegación vive en `NAV`, dentro de `apps/web/src/lib/site.ts`. El header usa `Link` de Next, `usePathname()` y `aria-current="page"`. Cada página debe conservar un único `<h1>`, un `<main id="contenido">` y metadata propia (`title`, `description` y `alternates.canonical` con su ruta relativa). No poner `canonical` en el layout: se heredaría a todas las páginas.
+
+`/sitemap.xml` se genera desde `NAV` (`src/app/sitemap.ts`), así que una ruta nueva en `NAV` entra al sitemap automáticamente. `/iniciar-sesion` lleva `noindex` y está excluida en `src/app/robots.ts`.
 
 ## Stack y comandos
 
@@ -94,12 +97,13 @@ Antes de ejecutar build o desarrollo, comprobar que la variable `NEXT_PUBLIC_WHA
 
 ## Estructura relevante de `apps/web`
 
-- `src/lib/site.ts`: marca, slogan, WhatsApp, dirección, navegación, servicios y slides del hero.
+- `src/lib/site.ts`: marca, slogan, dominio (`SITE_URL`), descripción por defecto, WhatsApp, dirección, navegación, servicios y slides del hero.
+- `src/app/robots.ts` y `src/app/sitemap.ts`: rutas de metadata para buscadores.
 - `src/components/`: `SiteHeader`, `SiteFooter`, `HeroCarousel`, `Servicios`, `Nosotros`, `Contacto`, `WhatsAppCta` e iconos.
 - `src/app/`: layout global, estilos globales y una carpeta `page.tsx` por ruta.
 - `src/app/globals.css`: tokens de color, tipografía y estilos globales.
 - `public/`: assets servidos por Next.
-- `next.config.mjs`: configuración de Next.js.
+- `next.config.mjs`: configuración de Next.js (incluye la redirección `www` → dominio raíz).
 - `apps/web/AGENTS.md`: reglas generadas para la versión instalada de Next.js; leerlas antes de modificar la app.
 
 ### Contexto para agentes y herramientas
@@ -162,6 +166,7 @@ Solo ampliar este alcance por solicitud explícita. «Iniciar sesión» permanec
 | 2026-09-18 | Construir `apps/web` con Webpack y conservar compatibilidad de instalación con npm. | Compatibilidad con el flujo de despliegue preparado para Hostinger. |
 | 2026-09-18 | Usar una imagen local del mapa y destacar Creciendo Juntos y la UTP. | Mejorar la comprensión visual de la ubicación. |
 | 2026-09-22 | Usar este archivo como memoria persistente estructurada, con protocolo de inicio y relevo. | Reducir la pérdida de contexto y evitar reconstruir decisiones en cada sesión. |
+| 2026-10-16 | Dominio de producción `https://creciendojuntos.site`, canónico sin `www`, fijado en código como `SITE_URL`. | Dominio definitivo indicado por el usuario; no es secreto, así que no necesita variable de entorno. |
 | 2026-09-26 | Refrescar el sistema visual (tokens, radios, header con blur, CTAs redondeados) sin cambiar rutas ni jerarquía de secciones. | Modernizar la sensación del sitio manteniendo Literata + Karla y los colores del logo. |
 
 Añadir aquí solo decisiones duraderas. Los detalles pasajeros pertenecen al relevo de sesión o al historial de Git.
@@ -175,18 +180,18 @@ Actualizar esta lista al resolver cada punto:
 - [x] CTA principal: WhatsApp.
 - [x] Logo, servicios y fotos del carrusel: fuente en `recursos_internos/`, copias servidas desde `public/`.
 - [x] WhatsApp y dirección centralizados en `site.ts`; el número no se muestra como texto en la UI.
-- [ ] Hosting definitivo, dominio y procedimiento de despliegue verificado en producción.
+- [x] Dominio: `creciendojuntos.site`.
+- [ ] Hosting definitivo y procedimiento de despliegue verificado en producción (DNS de `creciendojuntos.site` y `www` apuntando al hosting, SSL activo).
 - [ ] Copy definitivo de Nosotros y del hero; el actual es provisional.
 - [ ] URLs reales de Facebook e Instagram; el footer todavía usa placeholders.
 - [ ] Requisitos adicionales de accesibilidad o marca que deban respetarse.
 
 ## Relevo de la última sesión
 
-**Actualizado:** 2026-09-26.
+**Actualizado:** 2026-10-16.
 
-- Rediseño visual del sitio público conservando estructura: mismas rutas, header de dos niveles, hero partido, servicios alternados, nosotros sticky, contacto y footer.
-- Cambios en `apps/web/src/app/globals.css`, `layout.tsx`, `iniciar-sesion/page.tsx` y componentes (`SiteHeader`, `SiteFooter`, `WhatsAppCta`, `HeroCarousel`, `Servicios`, `Nosotros`, `Contacto`).
-- Tipografía y copy sin cambios; Literata + Karla y textos de producto intactos.
-- Validación: `pnpm --filter @creciendo-juntos/web lint` (ok); `pnpm --filter @creciendo-juntos/web build` con `.env.local` cargado (ok). No hubo navegador automatizado en esta sesión: conviene revisar en escritorio/móvil (menú, carrusel, CTA WhatsApp).
-- Cambios ajenos a preservar: `.gitignore` modificado/staged; `AGENTS.md` ya tenía cambios previos; carpeta untracked `.cursor/skills/frontend-design/`.
+- Integración del dominio `https://creciendojuntos.site`: `SITE_URL` y `SITE_DESCRIPTION` en `src/lib/site.ts`; `metadataBase`, descripción y Open Graph (`es_PE`, logo como imagen) en `src/app/layout.tsx`; `alternates.canonical` en cada `page.tsx`; nuevos `src/app/robots.ts` y `src/app/sitemap.ts`; `noindex` en `/iniciar-sesion`; redirección 308 `www` → raíz en `next.config.mjs`.
+- Validación: `pnpm --filter @creciendo-juntos/web lint` (ok); `pnpm build` en `apps/web` con `NEXT_PUBLIC_WHATSAPP_NUMBER` ficticio exportado solo en la shell (no había `.env.local` en esta máquina) (ok); con `pnpm start` se comprobó `/robots.txt`, `/sitemap.xml`, canónicas y `og:*` absolutas, `noindex` en `/iniciar-sesion` y `curl -H "Host: www.creciendojuntos.site"` → 308.
+- Pendiente: el 2026-10-16 el dominio aún no resolvía en DNS. Al desplegar, apuntar raíz y `www` al hosting, activar SSL, configurar `NEXT_PUBLIC_WHATSAPP_NUMBER` en el hosting y reconstruir; luego verificar `https://creciendojuntos.site/robots.txt` y registrar el sitemap en Google Search Console.
+- Sin cambios visuales en esta sesión; sigue pendiente la revisión en navegador del rediseño del 2026-09-26 (menú móvil, carrusel, CTA WhatsApp).
 

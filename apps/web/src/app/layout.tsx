@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Karla, Literata } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { BRAND } from "@/lib/site";
+import { BRAND, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const display = Literata({
@@ -18,9 +18,17 @@ const body = Karla({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: BRAND,
-  description: BRAND,
+  description: SITE_DESCRIPTION,
+  applicationName: BRAND,
   icons: { icon: "/logotipo.jpeg" },
+  openGraph: {
+    type: "website",
+    locale: "es_PE",
+    siteName: BRAND,
+    images: [{ url: "/logotipo.jpeg", alt: "Creciendo Juntos A&N" }],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

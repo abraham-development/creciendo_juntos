@@ -1,8 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { BRAND } from "@/lib/site";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: `Iniciar sesión · ${BRAND}`,
+  alternates: { canonical: "/iniciar-sesion" },
+  robots: { index: false, follow: true },
 };
 
 export default function IniciarSesionPage() {

@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: `Servicios · ${BRAND}`,
   description:
     "Psicología infantil, estimulación temprana y orientación familiar en Creciendo Juntos.",
+  alternates: { canonical: "/servicios" },
 };
 
 export default function ServiciosPage() {

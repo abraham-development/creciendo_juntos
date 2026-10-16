@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: `Nosotros · ${BRAND}`,
   description:
     "Centro de psicología y estimulación temprana. Acompañamos el desarrollo de niños, adolescentes y familias.",
+  alternates: { canonical: "/nosotros" },
 };
 
 export default function NosotrosPage() {
